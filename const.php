@@ -3,20 +3,6 @@
     session_start();
 ?>
 <?php
-    setlocale(LC_ALL, 'pt_BR');
-
-    $produtos = "SELECT produtoID, nomeproduto, modelo, precovenda, imagem ";
-    $produtos .= " FROM produtos ";
-    if(isset($_GET['produto'])){
-        $nome_produto = $_GET['produto'];
-        $produtos .= "WHERE nomeproduto LIKE '%{$nome_produto}%'";
-    }
-    $resultado = mysqli_query($conecta, $produtos);
-    if(!$resultado) {
-        die("Falha na consulta ao banco");   
-    }
-?>
-<?php
     if(isset($_POST['usuario'])){
         $usuario = $_POST['usuario'];
         $senha = $_POST['senha'];
@@ -40,41 +26,18 @@
         }
     }
 ?>
-<?php
-    if ( isset($_GET["codigo"]) ) {
-        $produto_id = $_GET["codigo"];
-    } else {
-        Header("Location: inicial.php");
-    }
-
-    // Consulta ao banco de dados
-    $consulta = "SELECT * ";
-    $consulta .= "FROM produtos ";
-    $consulta .= "WHERE produtoID = {$produto_id} ";
-    $detalhe    = mysqli_query($conecta,$consulta);
-
-    // Testar erro
-    if ( !$detalhe ) {
-        die("Falha no Banco de dados");
-    } else {
-        $dados_detalhe = mysqli_fetch_assoc($detalhe);
-        $produtoID      = $dados_detalhe["produtoID"];
-        $nomeproduto    = $dados_detalhe["nomeproduto"];
-        $precorevenda   = $dados_detalhe["precovenda"];
-        $imagemgrande   = $dados_detalhe["imagemg"];
-    }
-?>
 <!doctype html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Curso PHP Integração com MySQL</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel='stylesheet' href='css/css1.css'>
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel='stylesheet' href='css/css1.css'>
+    <link rel='stylesheet' href='css/crud.css'>
+    <title>Document</title>
+</head>
     <body>
-        <?php include_once("funcoes.php"); ?>
         <div class='container'>
             <nav class='navbar'>
                 <ul class="nav justify-content-center">
@@ -129,19 +92,9 @@
                 <p>Sempre com você!</p>
             </header>
         </div>
-        <main>  
-            <div class="container detalhe_produto">
-                <ul>
-                    <li class="imagem"><img src="<?php echo $imagemgrande ?>"></li>
-                    <li><h2><?php echo $nomeproduto ?></h2></li>
-                    <li><b>Preço: </b><?php echo real_format($precorevenda) ?></li>
-                </ul>
-                <a href='const.php'><div class='btn btn-success btn-block'>Buy now!</div></a>
-            </div>
-        </main>
+        <h1>Pagina em construção!</h1>
     </body>
 </html>
-
 <?php
     // Fechar conexao
     mysqli_close($conecta);

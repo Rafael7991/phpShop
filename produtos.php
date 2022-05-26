@@ -1,9 +1,12 @@
-<?php require_once("../conexao/conexao.php"); ?>
+<?php require_once("../conexao/conexaoshop.php"); ?>
+<?php
+    session_start();
+?>
 <?php
     setlocale(LC_ALL, 'pt_BR');
 
-    $produtos = "SELECT produtoID, nomeproduto, tempoentrega, precounitario, imagempequena ";
-    $produtos .= "FROM produtos ";
+    $produtos = "SELECT produtoID, nomeproduto, modelo, precovenda, imagem ";
+    $produtos .= " FROM produtos ";
     if(isset($_GET['produto'])){
         $nome_produto = $_GET['produto'];
         $produtos .= "WHERE nomeproduto LIKE '%{$nome_produto}%'";
@@ -27,14 +30,7 @@
             die('falha no acesso ao banco');
         }
 
-        $info = mysqli_fetch_assoc($acesso);
-
-        if(empty($info)){
-            $msg='Usuário ou senha incorretos';
-        } else {
-            $_SESSION['user_portal'] = $info['clienteID'];
-            header("location:produtoslog.php");
-        }
+        
     }
 ?>
 <!DOCTYPE html>
@@ -61,31 +57,38 @@
                     if(isset($_SESSION['user_portal'])){
                     $user = $_SESSION['user_portal'];
 
-                    $saudacao = "SELECT nomecompleto ";
+                    $saudacao = "SELECT nome ";
                     $saudacao .= "FROM clientes ";
                     $saudacao .= "WHERE clienteID = $user ";
 
                     $saudacao_login = mysqli_query($conecta,$saudacao);
                     if(!$saudacao_login){
                         die("falha no banco");
-                    } 
+                    }
+                   
                     $saudacao_login = mysqli_fetch_assoc($saudacao_login);
-                    $nome = $saudacao_login['nomecompleto'];
+                    $nome = $saudacao_login['nome'];
                     ?>
-                    <div id='header_saudacao'><h6>Bem-vindo(a), <?php echo $nome ?> - <a href='sair.php'>Sair</a></h6> </div> 
+                    <div style='margin-top:3px' id='header_saudacao'><h6>Bem-vindo(a), <?php echo $nome ?> - <a href='sair.php'>Sair</a></h6> </div>
+                    <li style='margin-left:30px;' class="nav-item"><a href='inserir.php' class="nav-link" href='/'>Cadastre sua empresa</a></li>
                     <?php
+                    } else {
+                        ?>
+                            <li class="nav-item"><a href='inserir.php' class="nav-link" href='/'>Cadastre-se</a></li>
+                            <form action='home.php' method='post' class="form-inline">
+                                <div class="input-group">
+                                    <input name='usuario' type="text" class="form-control" placeholder="Usuário">
+                                    <input name='senha' type="password" class="form-control" placeholder="Senha">
+                                    <input class="btn btn-sm btn-outline-secondary" type="submit" value='Login'>
+                                </div> 
+                            </form>
+                        <?php
                     }
                     ?>
                 </li>
-                <li class="nav-item"><a href='cadastro.php' class="nav-link" href='/'>Cadastre-se</a></li>
+                
             </ul>
-            <form action='home.php' method='post' class="form-inline">
-                <div class="input-group">
-                    <input name='usuario' type="text" class="form-control" placeholder="Usuário">
-                    <input name='senha' type="password" class="form-control" placeholder="Senha">
-                    <input class="btn btn-sm btn-outline-secondary" type="submit" value='Login'>
-                </div> 
-            </form>
+           
             <form action='search.php' method='GET'>
                 <div class="input-group">
                     <input  class="bsc form-control" type="search" name='produto' placeholder="Busca">
@@ -99,20 +102,29 @@
         </header>
     </div>
     
-    <div class='container list'> 
+    <div class='container list'>
         <?php
-            while($linha = mysqli_fetch_assoc($resultado)) {
+
+            
+        ?>
+        <?php
+            $marca1 = "SELECT nomeproduto, nome FROM produtos, fab ";
+            $marca1 .=" WHERE produtos.fabricanteID = fab.fabricanteID";
+            $marca2 = mysqli_query($conecta, $marca1);
+            while($linha = mysqli_fetch_assoc($resultado) ) {
+                $marca = mysqli_fetch_assoc($marca2);
         ?>
             <ul class='listagem'>
                 <div class='grid-item'>    
                     <li class="imagem">
                         <a href="detalhe.php?codigo=<?php echo $linha['produtoID'] ?>">
-                            <img src="<?php echo $linha["imagempequena"] ?>">
+                            <img src="<?php echo $linha["imagem"] ?>">
                         </a>
                     </li>
-                    <li><h5><?php echo $linha["nomeproduto"] ?></h5></li>
-                    <li>Tempo de Entrega : <?php echo $linha["tempoentrega"] ." dias" ?></li>
-                    <li>Preço unitário : <?php echo real_format($linha["precounitario"]) ?></li>
+                    <li><?php echo $linha['nomeproduto'] ?></li>
+                    <li><h5><?php echo $linha["modelo"] ?></h5></li>
+                    <li><?php echo $marca['nome'] ?></li>
+                    <li><?php echo real_format($linha["precovenda"]) ?></li>
                 </div>
             </ul>
         <?php
