@@ -112,5 +112,6 @@
         <input type='password' name='senha' placeholder='Senha'>
         <input type='submit' value='Enviar'>
     </form>
+    <?php include_once("rodape.html"); ?> 
 </body>
 </html>

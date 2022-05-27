@@ -39,8 +39,8 @@
 </head>
     <body>
         <div class='container'>
-            <nav class='navbar'>
-                <ul class="nav justify-content-center">
+            <nav class='navbar nav'>
+                <ul class=" nav justify-content-center">
                     <li style='margin-top:5px' class="nav-item"><a class="nav-link" href='home.php'>Home</a></li>
                     <li style='margin-top:5px' class="nav-item"><a class="nav-link" href='produtos.php'>Produtos</a></li>
                     
@@ -61,7 +61,7 @@
                         $nome = $saudacao_login['nome'];
                         ?>
                         <div style='margin-top:3px' id='header_saudacao'><h6>Bem-vindo(a), <?php echo $nome ?> - <a href='sair.php'>Sair</a></h6> </div>
-                        <li style='margin-left: 50px; margin-top:3px'class="nav-item"><a href='cadastro2.php' class="nav-link" href='/'>Cadastre sua empresa</a></li>
+                        <li style='margin-left: 50px; margin-top:3px'class="nav-item"><a href='const.php' class="nav-link" href='/'>Cadastre sua empresa</a></li>
                         <?php
                         } else {
                         ?>
@@ -86,12 +86,14 @@
                     </div>
                 </form>
             </nav>
-
             <header >
                 <img style='margin-left: 15px; margin-top: 20px;' src="../../img/logo3.png">
                 <p>Sempre com você!</p>
             </header>
         </div>
+        <h3 class='container' style='text-align:center; margin-top:10px;'>A home está em construção, mas você pode navegar pelos produtos, ou se cadastrar!</h3>
+        <img style='width:25%; margin-bottom:80px; margin-left:490px; margin-top:50px;' src='images/maw.png'>
+        <?php include_once("rodape.html"); ?> 
     </body>
 </html>
 <?php

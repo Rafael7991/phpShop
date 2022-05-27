@@ -92,7 +92,9 @@
                 <p>Sempre com você!</p>
             </header>
         </div>
-        <h1>Pagina em construção!</h1>
+        <h1 class='container' style='text-align:center;'>Página em construção!</h1>
+        <img style='width:25%; margin-bottom:80px; margin-left:490px; margin-top:50px;' src='images/maw.png'>
+        <?php include_once("rodape.html"); ?>
     </body>
 </html>
 <?php

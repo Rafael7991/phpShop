@@ -60,9 +60,18 @@
         $dados_detalhe = mysqli_fetch_assoc($detalhe);
         $produtoID      = $dados_detalhe["produtoID"];
         $nomeproduto    = $dados_detalhe["nomeproduto"];
-        $precorevenda   = $dados_detalhe["precovenda"];
+        $precovenda   = $dados_detalhe["precovenda"];
         $imagemgrande   = $dados_detalhe["imagemg"];
+        $modelo = $dados_detalhe['modelo'];
+        $fab_ID = $dados_detalhe['fabricanteID'];
+        $descricao = $dados_detalhe['descricao'];
     }
+?>
+<?php
+    $marca1 = "SELECT nome FROM fab ";
+    $marca1 .=" WHERE fabricanteID = {$fab_ID}";
+    $marca2 = mysqli_query($conecta, $marca1);
+    $marca = mysqli_fetch_assoc($marca2);
 ?>
 <!doctype html>
 <html>
@@ -130,15 +139,20 @@
             </header>
         </div>
         <main>  
-            <div class="container detalhe_produto">
+            <div style='width:1110px;' class="container detalhe_produto">
                 <ul>
-                    <li class="imagem"><img src="<?php echo $imagemgrande ?>"></li>
-                    <li><h2><?php echo $nomeproduto ?></h2></li>
-                    <li><b>Preço: </b><?php echo real_format($precorevenda) ?></li>
+                    <li style='margin-top:15px;' class="imagem"><img src="<?php echo $imagemgrande ?>"></li>
+                    <li><h3><?php echo $nomeproduto ?></h2></li>
+                    <li><h2><?php echo $marca['nome'] ?></h3></li>
+                    <li><h3><?php echo $modelo ?>
+                    <br></br>
+                    <li><h6><?php echo $descricao ?></h6></li>
+                    <li><b></b><?php echo real_format($precovenda) ?></li>
                 </ul>
-                <a href='const.php'><div class='btn btn-success btn-block'>Buy now!</div></a>
+                <a style='height:50px; margin-top:15px;' class='btn btn-success btn-block' href='const.php'>Buy now!</a>
             </div>
         </main>
+        <?php include_once("rodape.html"); ?>
     </body>
 </html>
 

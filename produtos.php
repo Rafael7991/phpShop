@@ -50,8 +50,8 @@
     <div class='container'>
         <nav class='navbar'>
             <ul class="nav justify-content-center">
-                <li class="nav-item"><a class="nav-link" href='home.php'>Home</a></li>
-                <li class="nav-item"><a class="nav-link" href='produtos.php'>Produtos</a></li>
+                <li style='margin-top:5px' class="nav-item"><a class="nav-link" href='home.php'>Home</a></li>
+                <li style='margin-top:5px' class="nav-item"><a class="nav-link" href='produtos.php'>Produtos</a></li>
                 <li class="nav-item">
                     <?php
                     if(isset($_SESSION['user_portal'])){
@@ -70,11 +70,11 @@
                     $nome = $saudacao_login['nome'];
                     ?>
                     <div style='margin-top:3px' id='header_saudacao'><h6>Bem-vindo(a), <?php echo $nome ?> - <a href='sair.php'>Sair</a></h6> </div>
-                    <li style='margin-left:30px;' class="nav-item"><a href='inserir.php' class="nav-link" href='/'>Cadastre sua empresa</a></li>
+                    <li style='margin-left:30px;' class="nav-item"><a href='const.php' class="nav-link" href='/'>Cadastre sua empresa</a></li>
                     <?php
                     } else {
                         ?>
-                            <li class="nav-item"><a href='inserir.php' class="nav-link" href='/'>Cadastre-se</a></li>
+                            <li style='margin-top:5px' class="nav-item"><a href='inserir.php' class="nav-link" href='/'>Cadastre-se</a></li>
                             <form action='home.php' method='post' class="form-inline">
                                 <div class="input-group">
                                     <input name='usuario' type="text" class="form-control" placeholder="Usuário">
@@ -131,7 +131,7 @@
             }
         ?>           
     </div>
-    
+    <?php include_once("rodape.html"); ?>
 </body>
 </html>
 <?php

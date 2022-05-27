@@ -44,9 +44,9 @@
     <div class='container'>
         <nav class='navbar'>
             <ul class="nav justify-content-center">
-                <li class="nav-item"><a class="nav-link" href='home.php'>Home</a></li>
-                <li class="nav-item"><a class="nav-link" href='produtos.php'>Produtos</a></li>
-                <li class="nav-item"><a href='cadastro.php' class="nav-link" href='/'>Cadastre-se</a></li>
+                <li style='margin-top:5px' class="nav-item"><a class="nav-link" href='home.php'>Home</a></li>
+                <li style='margin-top:5px' class="nav-item"><a class="nav-link" href='produtos.php'>Produtos</a></li>
+                <li style='margin-top:5px' class="nav-item"><a href='inserir.php' class="nav-link" href='/'>Cadastre-se</a></li>
                 <li class="nav-item">
                     <?php
                     if(isset($_SESSION['user_portal'])){
@@ -99,6 +99,7 @@
             <a class="btn btn-primary fab" href="const.php" role="button"><span>Fornecedor</span></a>
         </div>
     </div>
+    
     </body>
 </html>
 <?php
